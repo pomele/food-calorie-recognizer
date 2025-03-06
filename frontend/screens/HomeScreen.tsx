@@ -3,6 +3,7 @@ import { View, Text, Image, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import CustomButton from '../components/common/CustomButton';
 import { appStyles } from '../styles/styles';
+import { fetchCalories } from '../utils/api';
 
 export default function HomeScreen() {
   const [image, setImage] = useState<string | null>(null);
@@ -23,18 +24,15 @@ export default function HomeScreen() {
     try {
       const result = await launchFunction();
       if (!result.canceled) {
-        setImage(result.uri);
-        mockRecognizeCalories();
+        setImage(result.assets[0].uri);
+        console.log('Image URI:', result.assets[0].uri);
+        const data = await fetchCalories(result.assets[0].uri);
+        setCalories(data.calories);
       }
     } catch (error) {
-      Alert.alert('错误', '无法打开摄像头或相册，请检查权限设置或设备支持');
+      console.error('Error during image pick:', error);
+      // Alert.alert('错误', '无法打开摄像头或相册，请检查权限设置或设备支持');
     }
-  };
-
-  const mockRecognizeCalories = () => {
-    const mockCalories = Math.floor(Math.random() * 500) + 100;
-    setCalories(mockCalories);
-    Alert.alert('识别结果', `识别到的食物热量为: ${mockCalories} 卡路里`);
   };
 
   return (
