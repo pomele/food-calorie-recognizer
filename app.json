@@ -1,25 +1,41 @@
 {
   "expo": {
-    "name": "FoodCalorieApp",
-    "slug": "FoodCalorieApp",
+    "name": "Food Calorie Recognizer",
+    "slug": "food-calorie-recognizer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourcompany.foodcalorierecognizer",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take photos of food.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select food images."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.yourcompany.foodcalorierecognizer",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
